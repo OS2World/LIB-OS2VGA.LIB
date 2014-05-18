@@ -1,0 +1,47 @@
+# --- make-file to build os2vga.lib
+
+# --- makros
+
+FFLAGS = -c -G2 -Ox -Gt1024 -Fs
+MFLAGS = -la
+
+OBJECT = clrscr.obj os2vga.obj os2grf.obj pntset.obj\
+         rbtpln.obj rcolor.obj wbtpln.obj wcolor.obj
+
+LIBINP =+clrscr.obj+os2vga.obj+os2grf.obj+pntset.obj\
+        +rbtpln.obj+rcolor.obj+wbtpln.obj+wcolor.obj
+
+# --- inference rules
+
+.for.obj:
+        fl $(FFLAGS) $*.for ;
+
+.asm.obj:
+        masm $(MFLAGS) $*.asm ;
+
+.obj.lib:
+        if exist os2vga.lib del os2vga.lib
+        lib os2vga.lib $(LIBINP),os2vga.out;
+
+
+# --- Compiling
+
+os2vga.obj  : os2vga.for
+
+os2grf.obj  : os2grf.for
+
+clrscr.obj  : clrscr.asm
+
+pntset.obj  : pntset.asm
+
+rbtpln.obj  : rbtpln.asm
+
+rcolor.obj  : rcolor.asm
+
+wbtpln.obj  : wbtpln.asm
+
+wcolor.obj  : wcolor.asm
+
+# --- build library
+
+os2vga.lib: $(OBJECT)

@@ -1,0 +1,11 @@
+        SEGMENTS
+                clrscr_TEXT IOPL
+                pntset_TEXT IOPL
+                rcolor_TEXT IOPL
+                wcolor_TEXT IOPL
+
+        EXPORTS
+                CLRSCR 3
+                PNTSET 5
+                RCOLOR 1
+                WCOLOR 1
